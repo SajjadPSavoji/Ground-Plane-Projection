@@ -56,7 +56,7 @@ pip install -r requirements.txt
 
 ## Results
 
-<img src="docs/static/results.png" width="100%">
+<img src="docs/static/result1.png" width="100%">
 
 - Ground-plane classification is **consistently more accurate** than image-plane analysis for single-camera systems.
 - Weak fusion across multiple cameras yields **further accuracy gains** over any single view.

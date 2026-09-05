@@ -38,6 +38,17 @@ h1{font-size:clamp(28px,4.4vw,42px);line-height:1.18;margin:0 0 10px;letter-spac
 .authors .me{font-weight:700}
 .affil{color:var(--muted);font-size:14.5px;margin:6px 0 0}
 .notes{color:var(--muted);font-size:13px;margin:8px 0 0}
+figure.fig{margin:0 0 34px}
+figure.fig:last-child{margin-bottom:0}
+.tbl-wrap{overflow-x:auto;margin:0 0 10px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:9px 14px;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-weight:600;color:var(--muted);font-size:12.5px;letter-spacing:.05em;
+  text-transform:uppercase;border-bottom:1.5px solid var(--fg)}
+tbody tr:last-child td{border-bottom:1.5px solid var(--fg)}
+.tbl-title{font-weight:600;font-size:15px;margin:0 0 12px}
+.tbl-note{color:var(--muted);font-size:13.5px;margin:8px 0 30px}
 .tldr{background:var(--tldr);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
   padding:18px 22px;margin:0;font-size:17.5px;line-height:1.6}
 ul.pts{margin:0;padding-left:22px}
@@ -87,7 +98,8 @@ a{color:var(--accent)}
     <a class="btn" href="https://github.com/SajjadPSavoji/Ground-Plane-Projection">Code</a>
     <a class="btn" href="#bibtex">BibTeX</a>
   </div>
-  <figure class="teaser"><img src="static/teaser.png" alt="Ground Plane Projection teaser"></figure>
+  <figure class="teaser"><img src="static/teaser.png" alt="Ground Plane Projection overview">
+    <figcaption>Example from the CityFlow V2 dataset: vehicle trajectories observed in the camera image plane.</figcaption></figure>
 </div></header>
 <main class="wrap">
   <section>
@@ -103,19 +115,14 @@ a{color:var(--accent)}
     <ul class="pts"><li>Enhances two public ITS datasets and contributes a third, supplying ground-truth turn counts, orthographic projections, and image-to-ground homographies.</li><li>An open-source pipeline for automatic ground-plane turning movement counts.</li><li>A controlled single-camera comparison of image-plane against ground-plane trajectory classification across three datasets.</li><li>A multi-camera extension that fuses back-projected detections from several views through a simple weak-fusion approach.</li><li>Unsupervised probabilistic trajectory modeling in place of heuristic classification.</li></ul>
   </section>
   <section>
-    <h2>Method</h2>
-    <figure>
-      <img src="static/method.png" alt="Method overview">
-      <figcaption>Overview of the proposed approach.</figcaption>
-    </figure>
+    <h2>Approach</h2>
+    <figure class="fig"><img src="static/approach1.png" alt="Unsupervised learning pipeline for camera-plane analysis."><figcaption>Unsupervised learning pipeline for camera-plane analysis.</figcaption></figure><figure class="fig"><img src="static/approach2.png" alt="Unsupervised learning pipeline for ground-plane analysis, us"><figcaption>Unsupervised learning pipeline for ground-plane analysis, using homographies to back-project detections into real-world coordinates.</figcaption></figure><figure class="fig"><img src="static/approach3.png" alt="Intrinsic calibration. Left: original image. Right: with non"><figcaption>Intrinsic calibration. Left: original image. Right: with nonlinear distortion removed.</figcaption></figure>
   </section>
   <section>
     <h2>Results</h2>
-    <figure>
-      <img src="static/results.png" alt="Results">
-      <figcaption>Qualitative results and comparison against baselines.</figcaption>
-    </figure>
-    <ul class="pts res" style="margin-top:26px"><li>Ground-plane classification is <strong>consistently more accurate</strong> than image-plane analysis for single-camera systems.</li><li>Weak fusion across multiple cameras yields <strong>further accuracy gains</strong> over any single view.</li><li>Unsupervised probabilistic modeling outperforms heuristic classification methods.</li></ul>
+    <ul class="pts res" style="margin-bottom:34px"><li>Ground-plane classification is <strong>consistently more accurate</strong> than image-plane analysis for single-camera systems.</li><li>Weak fusion across multiple cameras yields <strong>further accuracy gains</strong> over any single view.</li><li>Unsupervised probabilistic modeling outperforms heuristic classification methods.</li></ul>
+    <p class="tbl-title">Reprojection error (pixels)</p><div class="tbl-wrap"><table><thead><tr><th>Dataset</th><th>Cameras</th><th>Camera plane</th><th>Orthophoto</th></tr></thead><tbody><tr><td>TransPlan</td><td>22</td><td>18.2</td><td><b>4.3</b></td></tr><tr><td>CityFlow</td><td>13</td><td>16.7</td><td><b>4.2</b></td></tr><tr><td>Region of York</td><td>18</td><td>15.8</td><td><b>2.8</b></td></tr></tbody></table></div><p class="tbl-note">Back-projection to the ground plane reduces reprojection error roughly four-fold.</p><p class="tbl-title">Turning movement count error rate — camera plane vs ground plane</p><div class="tbl-wrap"><table><thead><tr><th>Dataset</th><th>Domain</th><th>DIR</th><th>VOTE</th><th>ML</th></tr></thead><tbody><tr><td>CityFlow</td><td>Camera</td><td>6.6%</td><td>7.8%</td><td>5.1%</td></tr><tr><td></td><td><b>Ground</b></td><td><b>5.4%</b></td><td>7.9%</td><td><b>4.0%</b></td></tr><tr><td>TransPlan</td><td>Camera</td><td>12.6%</td><td>14.2%</td><td>11.0%</td></tr><tr><td></td><td><b>Ground</b></td><td><b>10.5%</b></td><td><b>13.8%</b></td><td><b>9.9%</b></td></tr><tr><td>Region of York</td><td>Camera</td><td>20.0%</td><td>38.2%</td><td>19.5%</td></tr><tr><td></td><td><b>Ground</b></td><td><b>14.9%</b></td><td>38.2%</td><td><b>13.8%</b></td></tr></tbody></table></div><p class="tbl-note">Ground-plane analysis is more accurate on every dataset for the learned (ML) classifier.</p><p class="tbl-title">Single-camera vs multi-camera weak fusion</p><div class="tbl-wrap"><table><thead><tr><th>Mode</th><th>Error rate</th><th>Bias</th></tr></thead><tbody><tr><td>Single</td><td>13.8%</td><td>5.2%</td></tr><tr><td><b>Multi</b></td><td><b>7.3%</b></td><td><b>0.1%</b></td></tr></tbody></table></div><p class="tbl-note">Weak fusion across cameras roughly halves error and all but eliminates bias.</p>
+    <figure class="fig"><img src="static/result1.png" alt="Representative prototype tracks selected by the unsupervised"><figcaption>Representative prototype tracks selected by the unsupervised clustering method.</figcaption></figure><figure class="fig"><img src="static/result2.png" alt="Optimized likelihood models in the ground plane for the turn"><figcaption>Optimized likelihood models in the ground plane for the turning movement classes at the Region of York intersection.</figcaption></figure>
   </section>
   <section id="bibtex">
     <h2>BibTeX</h2>
