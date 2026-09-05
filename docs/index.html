@@ -19,13 +19,11 @@
 <style>
 :root{
   --bg:#ffffff; --fg:#1a1a1a; --muted:#6b7280; --rule:#e5e7eb;
-  --accent:#1d4ed8; --chip:#f3f4f6; --chipfg:#374151; --code:#f6f8fa;
+  --accent:#1d4ed8; --chip:#f3f4f6; --chipfg:#374151; --code:#f6f8fa; --tldr:#f5f8ff;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
-  --bg:#0f1115; --fg:#e8eaed; --muted:#9aa3af; --rule:#242832;
-  --accent:#7aa2f7; --chip:#1a1e27; --chipfg:#c3c9d4; --code:#161a22;
-}}
+
 *{box-sizing:border-box}
+html{background:var(--bg)}
 body{margin:0;background:var(--bg);color:var(--fg);
   font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
   -webkit-font-smoothing:antialiased}
@@ -40,6 +38,12 @@ h1{font-size:clamp(28px,4.4vw,42px);line-height:1.18;margin:0 0 10px;letter-spac
 .authors .me{font-weight:700}
 .affil{color:var(--muted);font-size:14.5px;margin:6px 0 0}
 .notes{color:var(--muted);font-size:13px;margin:8px 0 0}
+.tldr{background:var(--tldr);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+  padding:18px 22px;margin:0;font-size:17.5px;line-height:1.6}
+ul.pts{margin:0;padding-left:22px}
+ul.pts li{margin:0 0 11px;line-height:1.62}
+ul.pts li::marker{color:var(--accent)}
+.res li{margin:0 0 9px}
 .contact{color:var(--muted);font-size:13.5px;margin:10px 0 0}
 .teaser{margin:34px 0 0}
 img{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:8px}
@@ -87,8 +91,16 @@ a{color:var(--accent)}
 </div></header>
 <main class="wrap">
   <section>
+    <h2>Summary</h2>
+    <p class="tldr">Shows that back-projecting detected vehicles to the ground plane, instead of analyzing them in the camera image plane, produces more accurate turning movement counts at intersections.</p>
+  </section>
+  <section>
     <h2>Abstract</h2>
     <p class="abstract">Accurate turning movement counts at intersections are important for signal control, traffic management and urban planning. Computer vision systems for automatic turning movement counts typically rely on visual analysis in the image plane of an infrastructure camera. Here we explore potential advantages of back-projecting vehicles detected in one or more infrastructure cameras to the ground plane for analysis in real-world 3D coordinates. For single-camera systems we find that back-projection yields more accurate trajectory classification and turning movement counts. We further show that even higher accuracy can be achieved through weak fusion of back-projected detections from multiple cameras. These results suggeest that traffic should be analyzed on the ground plane, not the image plane</p>
+  </section>
+  <section>
+    <h2>Key Contributions</h2>
+    <ul class="pts"><li>Enhances two public ITS datasets and contributes a third, supplying ground-truth turn counts, orthographic projections, and image-to-ground homographies.</li><li>An open-source pipeline for automatic ground-plane turning movement counts.</li><li>A controlled single-camera comparison of image-plane against ground-plane trajectory classification across three datasets.</li><li>A multi-camera extension that fuses back-projected detections from several views through a simple weak-fusion approach.</li><li>Unsupervised probabilistic trajectory modeling in place of heuristic classification.</li></ul>
   </section>
   <section>
     <h2>Method</h2>
@@ -103,6 +115,7 @@ a{color:var(--accent)}
       <img src="static/results.png" alt="Results">
       <figcaption>Qualitative results and comparison against baselines.</figcaption>
     </figure>
+    <ul class="pts res" style="margin-top:26px"><li>Ground-plane classification is <strong>consistently more accurate</strong> than image-plane analysis for single-camera systems.</li><li>Weak fusion across multiple cameras yields <strong>further accuracy gains</strong> over any single view.</li><li>Unsupervised probabilistic modeling outperforms heuristic classification methods.</li></ul>
   </section>
   <section id="bibtex">
     <h2>BibTeX</h2>
