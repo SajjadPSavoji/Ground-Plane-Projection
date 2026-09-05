@@ -67,11 +67,11 @@ pip install -r requirements.txt
 If you find this work useful, please cite:
 
 ```bibtex
-@article{pakdamansavoji2025ground,
-  title   = {Ground Plane Projection for Improved Traffic Analytics at Intersections},
-  author  = {Sajjad Pakdamansavoji and Kumar Vaibhav Jha and Baher Abdulhai and James H Elder},
-  journal = {arXiv preprint arXiv:2511.12342},
-  year    = {2025}
+@inproceedings{pakdamansavoji2024ground,
+  title     = {Ground Plane Projection for Improved Traffic Analytics at Intersections},
+  author    = {Sajjad Pakdamansavoji and Kumar Vaibhav Jha and Baher Abdulhai and James H Elder},
+  booktitle = {IEEE International Conference on Intelligent Transportation Systems (ITSC)},
+  year      = {2024}
 }
 ```
 
